@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Filler Encryption</title>
+		<script type="text/javascript" src="filler.js"></script>
+		<script>
+			// Copyright Carl Hewett 2014
+			
+			window.onload = main;
+			
+			var e = {}; // Elements
+			
+			function main()
+			{
+				e.keycodeInput = findElement("keycodeInputId");
+				e.mainInput = findElement("mainInputId");
+				e.encryptButton = findElement("encryptButtonId");
+				e.decryptButton = findElement("decryptButtonId");
+				e.mainOutput = findElement("mainOutputId");
+				
+				e.encryptButton.addEventListener("click", encryptButtonClicked, false);
+				e.decryptButton.addEventListener("click", decryptButtonClicked, false);
+			}
+			
+			function findElement(elementId) // Helper function
+			{
+				return document.getElementById(elementId);
+			}
+			
+			function encryptButtonClicked()
+			{
+				var keycodeValue = e.keycodeInput.value;
+				var mainInputValue = e.mainInput.value;
+				
+				var output = encrypt(keycodeValue, mainInputValue);
+				
+				writeToOutput(output);
+			}
+			
+			function decryptButtonClicked()
+			{
+				var keycodeValue = e.keycodeInput.value;
+				var mainInputValue = e.mainInput.value;
+				
+				var output = decrypt(keycodeValue, mainInputValue);
+				
+				writeToOutput(output);
+			}
+			
+			function writeToOutput(output)
+			{
+				e.mainOutput.value = output;
+			}
+		</script>
+	</head>
+	<body>
+		<p>Keycode:</p>
+		<input type="text" id="keycodeInputId"></input>
+		<br><br>
+		<p>Value:</p>
+		<textarea id="mainInputId"></textarea>
+		<br><br>
+		<button id="encryptButtonId">Encrypt</button>
+		<button id="decryptButtonId">Decrypt</button>
+		<br><br>
+		<p>Output:</p>
+		<textarea id="mainOutputId"></textarea>
+	</body>
+</html>
